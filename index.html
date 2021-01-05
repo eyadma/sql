@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
+    <div>`
         <H1>1-how much orders per customer</H1>
         SELECT ContactName ,count(OrderID) as 'order count'<br>
         FROM Customers<br>
@@ -24,7 +24,7 @@
     <img src="media/productname.jpg" alt="">
     </div>
 
-    <div><H1>3- order  but with employee name</H1>
+    <div><H1>3- order with employee name</H1>
         SELECT OrderID ,employees.LastName ,employees.FirstName<br>
 FROM `orders`<br>
 INNER JOIN employees ON employees.EmployeeID = orders.EmployeeID<br>
@@ -42,7 +42,7 @@ limit 10 <br>
 <img src="media/ordercust&emp.jpg" alt="">
 </div>
 
-<div><H1>5- orders with employee name and customer name and shipper name</H1>
+<div><H1>5- orders with employee name, customer name and shipper name</H1>
     SELECT OrderID, customers.ContactName , employees.FirstName, employees.LastName, shippers.CompanyName<br>
 FROM orders<br>
 INNER JOIN customers ON Customers.CustomerID = orders.CustomerID <br>
