@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <H1>1-how much orders per customer</H1>
+        SELECT ContactName ,count(OrderID) as 'order count'<br>
+        FROM Customers<br>
+        INNER JOIN orders ON orders.CustomerID = Customers.CustomerID<br>
+        group by ContactName<br>
+        limit 10<br>
+ <br>        <img src="media/countorders.jpg" alt="">
+    </div>
+    <div><H1>2- order details + product name</H1>
+        SELECT OrderID ,ProductName<br>
+        FROM `order details`<br>
+        INNER JOIN products ON products.ProductID= `order details`.ProductID<br>
+        group by ProductName<br>
+        limit 10 <br>
+    <img src="media/productname.jpg" alt="">
+    </div>
+
+    <div><H1>3- order  but with employee name</H1>
+        SELECT OrderID ,employees.LastName ,employees.FirstName<br>
+FROM `orders`<br>
+INNER JOIN employees ON employees.EmployeeID = orders.EmployeeID<br>
+group by LastName<br>
+limit 10 <br>
+<img src="media/employeename.jpg" alt="">
+    </div>
+
+<div><H1>4-  orders with employee name and customer name </H1>
+    SELECT OrderID, customers.ContactName , employees.FirstName, employees.LastName<br>
+FROM orders<br>
+INNER JOIN customers ON Customers.CustomerID = orders.CustomerID <br>
+INNER JOIN employees ON employees.EmployeeID = orders.EmployeeID<br>
+limit 10 <br>
+<img src="media/ordercust&emp.jpg" alt="">
+</div>
+
+<div><H1>5- orders with employee name and customer name and shipper name</H1>
+    SELECT OrderID, customers.ContactName , employees.FirstName, employees.LastName, shippers.CompanyName<br>
+FROM orders<br>
+INNER JOIN customers ON Customers.CustomerID = orders.CustomerID <br>
+INNER JOIN employees ON employees.EmployeeID = orders.EmployeeID<br>
+INNER JOIN shippers ON shippers.ShipperID = orders.ShipVia<br>
+order by OrderID<br>
+limit 10 <br>
+<br>
+<img src="media/ordercustempshipper.jpg" alt="">
+</div>
+
+<div><H1>6- how much money spent per country</H1>
+    SELECT ShipCountry, round(sum( `Order Details`.UnitPrice * `Order Details`.Quantity)) as `orders value`<br>
+FROM orders<br>
+INNER JOIN `order details` ON `order details`.OrderID = orders.OrderID<br>
+INNER JOIN shippers ON shippers.ShipperID = orders.ShipVia<br>
+group by ShipCountry<br>
+limit 10 <br>
+<Br>
+    <img src="media/OrdersValueByCountry.jpg" alt="">
+</div>
+
+<div><H1>7- how much money sold per product</H1>
+    SELECT  ProductName, round(sum( `Order Details`.UnitPrice * `Order Details`.Quantity)) as `orders value`<br>
+    FROM orders <br>
+    INNER JOIN `order details` ON `order details`.OrderID = orders.OrderID<br>
+    INNER JOIN products ON products.ProductID = `order details`.ProductID<br>
+    group by ProductName<br>
+    limit 10 <br>
+<br>
+<img src="media/ValueByProduct.jpg" alt="">    
+
+</div>
+
+<div><H1>8- how much odrers shipped per shipper</H1>
+    SELECT  shippers.CompanyName, round(sum( `Order Details`.UnitPrice * `Order Details`.Quantity)) as `orders value`<br>
+FROM orders <br>
+INNER JOIN `order details` ON `order details`.OrderID = orders.OrderID <br>
+INNER JOIN products ON products.ProductID = `order details`.ProductID <br>
+INNER JOIN shippers ON shippers.ShipperID = orders.ShipVia <br>
+group by shippers.CompanyName <br>
+<img src="media/valueByShipper.jpg" alt="">
+</div>
+</body>
+</html
